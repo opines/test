@@ -302,6 +302,7 @@ export default ComplexSvgDemo;
 
 ```js
 //convertToMatrix3d
+//matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 if (matrixValues.length !== 6) {
     alert("Invalid input. Please provide 6 values (a b c d e f).");
     return;
