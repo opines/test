@@ -261,3 +261,62 @@ export default ComplexSvgDemo;
 
 这个示例展示了如何创建一个复杂的SVG图形，包括渐变背景、文本、图案和多个元素。你可以根据需要修改和扩展这个示例，以创建更多复杂的图形和效果。
 
+
+
+## transform matrix 2d 转 3d
+
+将SVG的2D变换矩阵转换为3D变换矩阵需要理解SVG中的变换矩阵表示方法以及如何将其扩展为3D。SVG的2D变换矩阵通常采用以下形式：
+
+```csharp
+[a  b  c]
+[d  e  f]
+[0  0  1]
+```
+
+其中，a、b、c、d、e、f表示2D变换的参数，例如平移、旋转、缩放等。
+
+要将这个2D变换矩阵扩展为3D，你可以在第三行添加额外的元素，并将它们设置为3D变换所需的参数。通常，你可以将第三行设置为[0 0 1]，因为2D变换在Z轴上不会产生变化。然后，你可以在第一行和第二行添加额外的参数，以表示3D变换的X、Y和Z轴的变化。
+
+这是一个示例，将SVG的2D变换矩阵扩展为3D：
+
+假设你有一个2D变换矩阵如下：
+
+```csharp
+[a  b  c]
+[d  e  f]
+[0  0  1]
+```
+
+你可以将它扩展为一个3D变换矩阵，如下：
+
+```csharp
+[a  b  c  0]
+[d  e  f  0]
+[0  0  1  0]
+[0  0  0  1]
+```
+
+在这个3D变换矩阵中，前两行仍然表示2D变换的参数，而最后一行和最后一列都设置为0和1，以确保不对Z轴进行变换。
+
+请注意，SVG中的2D变换矩阵和3D变换矩阵之间的转换可能需要更多的信息，具体取决于你的需求和具体的变换操作。这只是一个基本的示例，实际情况可能更复杂。
+
+```js
+//convertToMatrix3d
+if (matrixValues.length !== 6) {
+    alert("Invalid input. Please provide 6 values (a b c d e f).");
+    return;
+}
+
+const a = matrixValues[0];
+const b = matrixValues[1];
+const c = matrixValues[2];
+const d = matrixValues[3];
+const e = matrixValues[4];
+const f = matrixValues[5];
+
+// Create the matrix3d transformation string
+const matrix3d = `matrix3d(${a}, ${b}, 0, 0, ${c}, ${d}, 0, 0, 0, 0, 1, 0, ${e}, ${f}, 0, 1)`;
+```
+
+
+
