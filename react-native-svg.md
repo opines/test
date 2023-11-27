@@ -350,4 +350,42 @@ const matrix3d = `matrix3d(${a}, ${b}, 0, 0, ${c}, ${d}, 0, 0, 0, 0, 1, 0, ${e},
 ```
 
 
+```js
+<svg id="mySVG" width="400px" height="300px">
+  <rect x="10" y="10" width="80" height="80" fill="blue" />
+</svg>
+
+<script>
+  function adjustViewBox() {
+    const svg = document.getElementById("mySVG");
+    const svgWidth = svg.clientWidth; // 获取SVG元素的宽度
+    const svgHeight = svg.clientHeight; // 获取SVG元素的高度
+
+    const contentWidth = 100; // 内容的原始宽度
+    const contentHeight = 100; // 内容的原始高度
+
+    let newViewBox = "";
+    if (svgWidth / svgHeight > contentWidth / contentHeight) {
+      // 宽高比较大时，高度撑满
+      const newContentWidth = svgHeight * (contentWidth / contentHeight);
+      const xOffset = (svgWidth - newContentWidth) / 2;
+      newViewBox = `${xOffset} 0 ${newContentWidth} ${svgHeight}`;
+    } else {
+      // 宽高比较小时，宽度撑满
+      const newContentHeight = svgWidth * (contentHeight / contentWidth);
+      const yOffset = (svgHeight - newContentHeight) / 2;
+      newViewBox = `0 ${yOffset} ${svgWidth} ${newContentHeight}`;
+    }
+
+    svg.setAttribute("viewBox", newViewBox);
+  }
+
+  // 监听窗口大小变化事件
+  window.addEventListener("resize", adjustViewBox);
+
+  // 页面加载完成后初始化viewBox
+  window.onload = adjustViewBox;
+</script>
+```
+
 
